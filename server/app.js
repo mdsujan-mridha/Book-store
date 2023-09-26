@@ -13,5 +13,8 @@ app.use(cookieParser())
 // path with config file 
 dotenv.config({ path: "./config/config.env" })
 
+const user = require("./route/userRouter")
+// user API 
+app.use("/api/v1", user)
 
 module.exports = app;
