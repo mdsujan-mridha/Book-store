@@ -57,7 +57,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link className='text-lg font-bold '> Login </Link>
+                    <Link to="/login" className='text-lg font-bold '> Login </Link>
                 </div>
             </div>
         </Fragment>

@@ -1,25 +1,63 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import loginImg from "../images/login.png";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import loginImg from "../images/login.png"
 import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, register } from '../Action/userAction';
 import { toast } from 'react-toastify';
-import { clearErrors } from '../Action/userAction';
 import Loader from '../Layout/Loader';
 
-const Login = () => {
+
+const Signup = () => {
     const dispatch = useDispatch();
-    const [loginEmail, setLoginEmail] = useState("");
-    const [loginPassword, setLoginPassword] = useState("");
+    // call action
     const { error, loading, isAuthenticated } = useSelector((state) => state.user);
 
-    const loginSubmit = (e) => {
-        e.preventDefault();
-        dispatch(loginEmail, loginPassword)
-        // console.log(loginEmail, loginPassword)
-    }
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        password: "",
+
+    });
+    const { name, email, password } = user;
+    const [avatar, setAvatar] = useState(loginImg);
+    const [avatarPreview, setAvatarPreview] = useState(loginImg);
+
+
+    // navigate user 
     const navigate = useNavigate();
     //    get location 
     const location = useLocation();
+    // submit register info
+    const registerSubmit = (e) => {
+        e.preventDefault();
+        const myForm = new FormData();
+
+        myForm.set("name", name);
+        myForm.set("email", email);
+        myForm.set("password", password);
+        dispatch(register(myForm));
+        // console.log(name, email, password)
+    }
+    // register data change
+
+    const registerDataChange = (e) => {
+        if (e.target.name === "avatar") {
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setAvatarPreview(reader.result);
+                    setAvatar(reader.result);
+                }
+            };
+            reader.readAsDataURL(e.target.files[[0]]);
+        } else {
+            setUser({ ...user, [e.target.name]: e.target.value });
+        }
+
+    };
+
+    //  redirect user 
     const redirect = location.search ? location.search.split("=")[1] : "/account";
     useEffect(() => {
 
@@ -33,6 +71,7 @@ const Login = () => {
         }
     }, [dispatch, error, isAuthenticated, redirect, navigate])
 
+
     return (
         <Fragment>
             {
@@ -44,38 +83,56 @@ const Login = () => {
                             <div className="lg:min-h-screen">
                                 <div className="flex flex-col gap-5 lg:justify-center md:justify-center lg:items-center md:items-center">
                                     <img src={loginImg} alt="Login" />
-                                    <div className='w-96 px-12'>
+                                    <div className='w-96 px-5'>
                                         <form
-                                            className='flex flex-col justify-center items-center gap-5'
-                                            onSubmit={loginSubmit}
+                                            className='flex flex-col items-center gap-5'
+                                            onSubmit={registerSubmit}
                                         >
+
+                                            <input
+                                                type="text"
+                                                required
+                                                placeholder="Enter your name"
+                                                className="input input-bordered input-primary w-full text-white text-md font-bold placeholder-gray-100"
+                                                style={{ backgroundColor: "#589BFF", outline: 'none' }}
+                                                onChange={registerDataChange}
+                                                value={name}
+                                                name='name'
+                                            />
                                             <input
                                                 type="email"
                                                 required
-                                                value={loginEmail}
                                                 placeholder="Enter your email"
                                                 className="input input-bordered input-primary w-full text-white text-md font-bold placeholder-gray-100"
                                                 style={{ backgroundColor: "#589BFF", outline: 'none' }}
-                                                onChange={(e) => setLoginEmail(e.target.value)}
+                                                onChange={registerDataChange}
+                                                name='email'
+                                                value={email}
+
+                                            />
+
+
+                                            <input
+                                                type="password"
+                                                required
+                                                placeholder="Enter your password"
+                                                className="input input-bordered input-primary w-full text-white text-md font-bold placeholder-gray-100"
+                                                style={{ backgroundColor: "#589BFF", outline: 'none' }}
+                                                onChange={registerDataChange}
+                                                name='password'
+                                                value={password}
 
                                             />
                                             <input
-                                                type="password"
-                                                value={loginPassword}
-                                                required placeholder="Enter your password"
-                                                className="input input-bordered input-primary w-full text-white text-md font-bold placeholder-gray-100"
-                                                style={{ backgroundColor: "#589BFF", outline: 'none' }}
-                                                onChange={(e) => setLoginPassword(e.target.value)}
-                                            />
-                                            <input
                                                 type="submit"
-                                                value="Login"
+                                                value="Register"
                                                 className="input input-bordered input-primary w-full text-white text-md font-bold placeholder-gray-100 bg-primary"
                                             />
+
                                         </form>
                                         <div className='flex justify-between items-center mt-5'>
                                             <Link className='text-md font-bold text-primary'> Forgot password </Link>
-                                            <Link to="/register" className='text-md font-bold text-primary'> No account yet? </Link>
+                                            <Link to="/login" className='text-md font-bold text-primary'> Already have an account? </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -87,4 +144,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
