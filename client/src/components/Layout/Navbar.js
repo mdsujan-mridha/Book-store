@@ -1,7 +1,28 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../images/logo.png";
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, logout } from '../Action/userAction';
+
 const Navbar = () => {
+    const dispatch = useDispatch();
+    const { user, error,isAuthenticated } = useSelector((state) => state.user);
+
+
+    useEffect(() => {
+
+        if (error) {
+            toast.error(error);
+            dispatch(clearErrors())
+        }
+
+    }, [error, dispatch]);
+
+    const logoutUser = () => {
+        dispatch(logout())
+        toast.success("Log out")
+    }
 
     const menuItem = [
         {
@@ -17,11 +38,11 @@ const Navbar = () => {
             menu: <Link to="/blogs"> Blogs </Link>
         },
         {
-            id: 1,
+            id: 4,
             menu: <Link to="/contact"> Contact </Link>
         },
         {
-            id: 1,
+            id: 5,
             menu: <Link to="/about"> About us </Link>
         },
     ]
@@ -57,7 +78,14 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className='text-lg font-bold '> Login </Link>
+                    {
+                        user && isAuthenticated ?
+                            <> <Link onClick={logoutUser} className='text-lg font-bold '> Logout </Link> </>
+                            :
+                            <>
+                                <Link to="/login" className='text-lg font-bold '> Login </Link>
+                            </>
+                    }
                 </div>
             </div>
         </Fragment>

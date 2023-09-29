@@ -14,7 +14,7 @@ const middleWare = [thunk];
 const store = createStore(
     reducer,
     initialState,
-    composeWithDevTools(applyMiddleware(...middleWare))
+    composeWithDevTools(applyMiddleware(...middleWare)),
 );
 
 

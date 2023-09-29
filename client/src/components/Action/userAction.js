@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CLEAR_ERRORS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS } from "../Constant/userConstant";
+import { CLEAR_ERRORS, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_REQUEST, REGISTER_USER_SUCCESS } from "../Constant/userConstant";
 
 
 // login 
@@ -34,7 +34,21 @@ export const register = (userData) => async (dispatch) => {
     }
 }
 
+export const logout = () => async (dispatch) => {
 
+    try {
+        await axios.get(`http://localhost:5000/api/v1/logout`)
+        dispatch({
+            type: LOGOUT_SUCCESS,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: LOGOUT_FAIL,
+            error: error.response.message
+        })
+    }
+}
 
 // clear error 
 export const clearErrors = () => async (dispatch) => {

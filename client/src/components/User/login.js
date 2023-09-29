@@ -3,7 +3,7 @@ import loginImg from "../images/login.png";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors } from '../Action/userAction';
+import { clearErrors, login } from '../Action/userAction';
 import Loader from '../Layout/Loader';
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
 
     const loginSubmit = (e) => {
         e.preventDefault();
-        dispatch(loginEmail, loginPassword)
+        dispatch(login(loginEmail, loginPassword))
         // console.log(loginEmail, loginPassword)
     }
     const navigate = useNavigate();
