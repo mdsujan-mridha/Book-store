@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, } from 'react';
 import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -9,8 +9,18 @@ import Signup from './components/User/Signup';
 import Login from "./components/User/Login";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Profile from './components/User/Profile';
+import axios from 'axios';
+import store from "./store";
+import { loadUser } from './components/Action/userAction';
 function App() {
+
+  axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, [])
+
   return (
     <Fragment>
 
@@ -21,6 +31,9 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/register' element={<Signup />} ></Route>
           <Route path='/login' element={<Login />} ></Route>
+
+          {/* protected route  */}
+          <Route path='/account' element={<Profile />} ></Route>
         </Routes>
         <Footer />
       </Router>

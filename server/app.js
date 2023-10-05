@@ -7,7 +7,17 @@ const dotenv = require("dotenv");
 
 // apply middleware 
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+    origin:'http://localhost:3000',
+    'Content-Type': 'Authorization',
+    "Content-type":"application/json",
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
+
 app.use(cookieParser())
 
 // path with config file 
