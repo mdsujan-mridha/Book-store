@@ -13,6 +13,8 @@ import Profile from './components/User/Profile';
 import axios from 'axios';
 import store from "./store";
 import { loadUser } from './components/Action/userAction';
+import Books from './components/Books/Books';
+import ExChangeBooks from './components/Books/ExChangeBooks';
 function App() {
 
   axios.defaults.withCredentials = true;
@@ -31,7 +33,10 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/register' element={<Signup />} ></Route>
           <Route path='/login' element={<Login />} ></Route>
-
+          {/* it will protected  */}
+          <Route path='/book/request' element={<Books />}></Route>
+          {/* it will protected  */}
+          <Route path='/book/exchnage' element={<ExChangeBooks />}></Route>
           {/* protected route  */}
           <Route path='/account' element={<Profile />} ></Route>
         </Routes>

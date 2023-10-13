@@ -31,7 +31,11 @@ const Navbar = () => {
         },
         {
             id: 2,
-            menu: <Link to="/books"> Books </Link>
+            menu: <Link to="/book/request"> Book Request </Link>
+        },
+        {
+            id: 4,
+            menu: <Link to="/book/exchnage"> Exchange Book </Link>
         },
         {
             id: 3,
