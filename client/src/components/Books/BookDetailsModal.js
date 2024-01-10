@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Close } from '@mui/icons-material';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
+import { Button, Dialog, DialogContent,IconButton, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({

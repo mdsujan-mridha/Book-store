@@ -15,6 +15,7 @@ import store from "./store";
 import { loadUser } from './components/Action/userAction';
 import Books from './components/Books/Books';
 import ExChangeBooks from './components/Books/ExChangeBooks';
+import Dashboard from './components/Admin/Dashboard';
 function App() {
 
   axios.defaults.withCredentials = true;
@@ -39,6 +40,11 @@ function App() {
           <Route path='/book/exchnage' element={<ExChangeBooks />}></Route>
           {/* protected route  */}
           <Route path='/account' element={<Profile />} ></Route>
+
+          {/* admin route  */}
+
+          <Route path='/admin/dashboard' element={<Dashboard />} ></Route>
+
         </Routes>
         <Footer />
       </Router>
