@@ -14,6 +14,7 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, S
 import { clearErrors, postNewSellBook } from '../Action/sellBookAction';
 import { toast } from 'react-toastify';
 import { NEW_SELL_BOOK_RESET } from '../Constant/sellBookConstant';
+import Loader from '../Layout/Loader';
 const ExChangeBookData = [
     {
         id: "1",
@@ -103,6 +104,7 @@ const Profile = () => {
         }
         if (success) {
             toast.success(success);
+            setOpen(false);
             dispatch({ type: NEW_SELL_BOOK_RESET })
         }
 
@@ -110,21 +112,21 @@ const Profile = () => {
 
 
 
-    const createProductSubmit =  (e) => {
+    const createProductSubmit = (e) => {
         e.preventDefault();
 
-      
-            const requestBody = {
-                title: name,
-                description: description,
-                price: price,
-                author: author,
-                category: category,
-                images: images, // To store Base64 encoded images
-            };
 
-            dispatch(postNewSellBook(requestBody));
-        
+        const requestBody = {
+            title: name,
+            description: description,
+            price: price,
+            author: author,
+            category: category,
+            images: images, // To store Base64 encoded images
+        };
+
+        dispatch(postNewSellBook(requestBody));
+
     };
 
 
@@ -242,7 +244,9 @@ const Profile = () => {
                                 ))
                             }
                         </div>
-                        <input type="submit" value="Post" className='w-full h-10 bg-primary rounded-full text-white' />
+                        {
+                            loading ? <> <Loader /> </> : <>  <input type="submit" value="Post" className='w-full h-10 bg-primary rounded-full text-white cursor-pointer' /> </>
+                        }
                     </form>
 
                 </DialogContent>

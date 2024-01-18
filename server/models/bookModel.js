@@ -7,9 +7,17 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: [true, "Product name required"]
     },
+    author: {
+        type: String,
+        required: [true, "Product author required"] 
+    },
     description: {
         type: String,
         required: [true, "Enter your product description"]
+    },
+    price: {
+        type: Number,
+        required: [true, "Enter your product price"]
     },
     Stock: {
         type: Number,
@@ -24,7 +32,7 @@ const bookSchema = new mongoose.Schema({
         {
             public_id: {
                 type: String,
-                required: true.
+                required: true
             },
             url: {
                 type: String,
@@ -32,10 +40,12 @@ const bookSchema = new mongoose.Schema({
             },
         },
     ],
-    reviews: {
-        type: String,
-        required: true,
-    },
+ user:{
+    type: mongoose.Schema.Types.ObjectId,
+     ref: "users",
+     required: true
+ }
+
 });
 
 

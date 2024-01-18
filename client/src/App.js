@@ -16,6 +16,7 @@ import { loadUser } from './components/Action/userAction';
 import Books from './components/Books/Books';
 import ExChangeBooks from './components/Books/ExChangeBooks';
 import Dashboard from './components/Admin/Dashboard';
+import BuyBooks from './components/Books/BuyBooks';
 function App() {
 
   axios.defaults.withCredentials = true;
@@ -38,6 +39,7 @@ function App() {
           <Route path='/book/request' element={<Books />}></Route>
           {/* it will protected  */}
           <Route path='/book/exchnage' element={<ExChangeBooks />}></Route>
+          <Route path='/sell/books' element={<BuyBooks />}></Route>
           {/* protected route  */}
           <Route path='/account' element={<Profile />} ></Route>
 

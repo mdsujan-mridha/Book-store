@@ -34,21 +34,26 @@ const Navbar = () => {
             menu: <Link to="/book/request"> Book Request </Link>
         },
         {
-            id: 4,
+            id: 3,
             menu: <Link to="/book/exchnage"> Exchange Book </Link>
         },
         {
-            id: 3,
-            menu: <Link to="/blogs"> Blogs </Link>
-        },
-        {
             id: 4,
-            menu: <Link to="/contact"> Contact </Link>
+            menu: <Link to="/sell/books"> Buy Books </Link>
         },
         {
             id: 5,
-            menu: <Link to="/about"> About us </Link>
+            menu: <Link to="/blogs"> Blogs </Link>
         },
+        {
+            id: 6,
+            menu: <Link to="/contact"> Contact </Link>
+        },
+        {
+            id: 7,
+            menu: <Link to="/about"> About us </Link>
+        }
+
     ]
 
     return (
