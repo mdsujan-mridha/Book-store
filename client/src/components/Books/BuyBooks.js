@@ -14,7 +14,7 @@ import Loader from '../Layout/Loader';
 import BookCard from './BookCard';
 import { clearErrors, getAllSellBooks } from '../Action/sellBookAction';
 import { toast } from 'react-toastify';
-
+import Pagination from "react-js-pagination"
 
 // set category 
 const categories = [
@@ -146,6 +146,28 @@ const BuyBooks = () => {
                                 )
                         }
                     </div>
+                    {
+                        resultPerPage < count && (
+                            <div className='flex justify-center mt-10'>
+                                <Pagination
+                                    activePage={currentPage}
+                                    itemsCountPerPage={resultPerPage}
+                                    totalItemsCount={totalBooks}
+                                    onChange={setCurrentPageNo}
+                                    nextPageText="Next"
+                                    previousPageText="Prev"
+                                    firstPageText="First"
+                                    lastPageText="Last"
+                                    pageRangeDisplayed={5}
+                                    innerClass="flex justify-center gap-3 items-center text-center"
+                                    itemClass="border p-2 rounded mr-2 page-item w-14 bg-primary hover:opacity-75"
+                                    linkClass="text-white no-underline page-link text-lg font-bold"
+                                    activeClass="text-white pageItemActive opacity-70"
+                                    activeLinkClass="pageLinkActive text-white"
+                                />
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </Fragment>

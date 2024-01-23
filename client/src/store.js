@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { newSellBookReducer, sellBookReducer } from "./components/Reducer/sellBookReducer";
 import { newRequestBookReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
+import { exchangeBookReducer } from "./components/Reducer/exchangeBookReducer";
 
 
 const reducer = combineReducers({
@@ -11,7 +12,8 @@ const reducer = combineReducers({
     sellBooks: sellBookReducer,
     sellBook: newSellBookReducer,
     requestBooks: requestBookReducer,
-    requestBook: newRequestBookReducer
+    requestBook: newRequestBookReducer,
+    exchangeBooks: exchangeBookReducer,
 
 
 });

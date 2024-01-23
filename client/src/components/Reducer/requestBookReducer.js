@@ -44,6 +44,7 @@ export const newRequestBookReducer = (state = { requestBook: {} }, action) => {
     switch (action.type) {
         case NEW_REQUEST_BOOK_REQUEST:
             return {
+                ...state,
                 loading: true,
             }
         case NEW_REQUEST_BOOK_SUCCESS:
@@ -53,6 +54,7 @@ export const newRequestBookReducer = (state = { requestBook: {} }, action) => {
             }
         case NEW_REQUEST_BOOK_FAIL:
             return {
+                ...state,
                 loading: false,
                 error: action.payload,
             }

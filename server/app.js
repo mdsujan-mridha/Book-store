@@ -26,6 +26,7 @@ dotenv.config({ path: "./config/config.env" })
 const user = require("./route/userRouter")
 const book = require("./route/bookRouter")
 const bookRequest = require("./route/requestBookRouter");
+const exchangeBook = require("./route/exchangeBookRouter");
 // user API 
 app.use("/api/v1", user);
 // sell book router 
@@ -33,6 +34,8 @@ app.use("/api/v1", book);
 
 //create book request
 app.use("/api/v1", bookRequest);
+// exchnage book 
+app.use("/api/v1", exchangeBook);
 
 
 

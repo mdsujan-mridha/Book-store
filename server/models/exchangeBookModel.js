@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const requestSchema = new mongoose.Schema({
+const exchangeBookSchema = new mongoose.Schema({
 
     title: {
         type: String,
@@ -23,6 +23,7 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Enter your book edition'],
     }
+
 })
 
-module.exports = mongoose.model("requestBook", requestSchema);
+module.exports = mongoose.model("exchangeBook",exchangeBookSchema);
