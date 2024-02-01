@@ -32,6 +32,60 @@ exports.getAllRequestBook = catchAsyncError(async (req, res, next) => {
         requestBooks,
         filteredBooks,
         resultPerPage
-        
+
+    })
+});
+
+// get product details 
+exports.getRequestBookDetails = catchAsyncError(async (req, res, next) => {
+    const requestBook = await RequestBook.findById(req.params.id);
+    if (!requestBook) {
+        return next(new AppError("No book found with that ID", 404))
+    }
+    res.status(200).json({
+        success: true,
+        requestBook
+    })
+});
+
+// update book by admin 
+exports.updateRequestBook = catchAsyncError(async (req, res, next) => {
+    let requestBook = await RequestBook.findById(req.params.id);
+
+    if (!requestBook) {
+        return next(new ErrorHandler("requestBook not found", 404))
+    }
+    requestBook = await RequestBook.findByIdAndUpdate(req.params.id,
+        req.body,
+        {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        });
+    res.status(200).json({
+        success: true,
+        requestBook
+    })
+});
+
+// delete book 
+exports.deleteRequestBook = catchAsyncError(async (req, res, next) => {
+    const requestBook = await RequestBook.findById(req.params.id);
+    if (!requestBook) {
+        return next(new AppError("No book found with that ID", 404))
+    }
+    await requestBook.remove();
+    res.status(204).json({
+        success: true,
+        requestBook
+    })
+});
+
+// get all book request admin
+exports.getAllBookRequestAdmin = catchAsyncError(async (req, res, next) => {
+    const requestBook = await RequestBook.find();
+    res.status(200).json({
+        success: true,
+        requestBook
     })
 })
