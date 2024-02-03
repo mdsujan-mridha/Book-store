@@ -2,23 +2,37 @@ import { applyMiddleware, combineReducers, legacy_createStore as createStore } f
 import { userReducer } from "./components/Reducer/userReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { newSellBookReducer, sellBookReducer } from "./components/Reducer/sellBookReducer";
+import { newSellBookReducer, newSellDetailsReducer, sellBookReducer } from "./components/Reducer/sellBookReducer";
 import { newRequestBookReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
-import { exchangeBookReducer } from "./components/Reducer/exchangeBookReducer";
+import { exchangeBookReducer, newExchangeBookReducer } from "./components/Reducer/exchangeBookReducer";
+import { cartReducer } from "./components/Reducer/cartReducer";
 
 
 const reducer = combineReducers({
     user: userReducer,
     sellBooks: sellBookReducer,
     sellBook: newSellBookReducer,
+    book: newSellDetailsReducer,
     requestBooks: requestBookReducer,
     requestBook: newRequestBookReducer,
     exchangeBooks: exchangeBookReducer,
-
-
+    exchangeBook: newExchangeBookReducer,
+    sellBookDetails: newSellDetailsReducer,
+    cart: cartReducer,
 });
 
-let initialState = {};
+let initialState = {
+    cart: {
+        cartItems: localStorage.getItem("cartItems")
+            ? JSON.parse(localStorage.getItem("cartItems"))
+            : [],
+        shippingInfo: localStorage.getItem("shippingInfo")
+            ?
+            JSON.parse(localStorage.getItem("shippingInfo"))
+            : {},
+    }
+};
+
 const middleWare = [thunk];
 
 const store = createStore(

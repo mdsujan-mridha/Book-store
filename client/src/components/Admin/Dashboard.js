@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import "./Dashboard.css";
 import BardChart from './BardChart';
+import { Line, Doughnut } from "react-chartjs-2";
 
 import LineChart from './LineChart';
 
-import { Chart, CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement } from 'chart.js';
+import { Chart, CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement,ArcElement } from 'chart.js';
 
 // Register necessary controllers and elements
-Chart.register(CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement);
+Chart.register(CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement,ArcElement);
 
 const Dashboard = () => {
     const Data = [
@@ -63,12 +64,48 @@ const Dashboard = () => {
     });
 
 
-
+    //    line state 
+    const outOfStock = 0;
+    const lineState = {
+        labels: ["Initial Amount", "Amount Earned"],
+        datasets: [
+            {
+                label: "TOTAL AMOUNT",
+                backgroundColor: ["tomato"],
+                hoverBackgroundColor: ["rgb(197, 72, 49)"],
+                data: [0, 4000],
+            },
+        ],
+    };
+    const doughnutState = {
+        labels: ["Out of Stock", "InStock"],
+        datasets: [
+            {
+                backgroundColor: ["#00A6B4", "#6800B4"],
+                hoverBackgroundColor: ["#4B5000", "#35014F"],
+                data: [outOfStock, 20 - outOfStock],
+            },
+        ],
+    };
     return (
-        <div className='dashboard'>
+        <div className='dashboard min-h-screen'>
             <Sidebar />
             <div className="dashboardContainer">
                 <h1>Dashboard</h1>
+                <div className='px-12 flex gap-5 mb-10'>
+                    <div className='w-96 h-52 bg-primary rounded-md flex flex-col justify-center items-center'>
+                        <h1 className='text-center text-white font-bold text-3xl'> Total Books </h1>
+                        <p className='text-xl font-bold text-white text-center'> 200+ </p>
+                    </div>
+                    <div className='w-96 h-52 bg-orange-500 rounded-md flex flex-col justify-center items-center'>
+                        <h1 className='text-center text-white font-bold text-3xl'> Total users </h1>
+                        <p className='text-xl font-bold text-white text-center'> 100+ </p>
+                    </div>
+                    <div className='w-96 h-52 bg-red-500 rounded-md flex flex-col justify-center items-center'>
+                        <h1 className='text-center text-white font-bold text-3xl'> Total Orders </h1>
+                        <p className='text-xl font-bold text-white text-center'> 50+ </p>
+                    </div>
+                </div>
                 <div className='w-full flex flex-col lg:flex-row'>
                     <div className='w-full  lg:w-1/2'>
                         <BardChart chartData={chartData} />
@@ -77,7 +114,14 @@ const Dashboard = () => {
                         <LineChart chartData={chartData} />
                     </div>
                 </div>
-
+                <div> <h1 className='text-4xl font-bold text-center border-b-2 py-5'> Total Earned Amount </h1> </div>
+                <div className='lineChart'>
+                    <Line data={lineState} />
+                </div>
+                <div> <h1 className='text-4xl font-bold text-center border-b-2 py-5'> In stock or Out of Stock </h1> </div>
+                <div className='doughnutChart'>
+                    <Doughnut data={doughnutState} />
+                </div>
             </div>
         </div>
     );

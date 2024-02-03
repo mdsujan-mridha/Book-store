@@ -17,6 +17,10 @@ import Books from './components/Books/Books';
 import ExChangeBooks from './components/Books/ExChangeBooks';
 import Dashboard from './components/Admin/Dashboard';
 import BuyBooks from './components/Books/BuyBooks';
+import BookDetails from './components/Books/BookDetails';
+import Cart from './components/Cart/Cart';
+import Shipping from './components/Cart/Shipping';
+import ConfirmOrder from './components/Cart/ConfirmOrder';
 function App() {
 
   axios.defaults.withCredentials = true;
@@ -40,8 +44,12 @@ function App() {
           {/* it will protected  */}
           <Route path='/book/exchnage' element={<ExChangeBooks />}></Route>
           <Route path='/sell/books' element={<BuyBooks />}></Route>
+          <Route path='/sell/books/:id' element={<BookDetails />}></Route>
           {/* protected route  */}
           <Route path='/account' element={<Profile />} ></Route>
+          <Route path='/cart' element={<Cart />}></Route>
+          <Route path='/shipping' element={<Shipping />}></Route>
+          <Route path='/order/confirm' element={<ConfirmOrder />}></Route>
 
           {/* admin route  */}
 

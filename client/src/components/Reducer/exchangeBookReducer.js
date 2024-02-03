@@ -3,7 +3,9 @@ import {
     ALL_EXCHANGE_BOOK_REQUEST,
     ALL_EXCHANGE_BOOK_SUCCESS,
     CLEAR_ERRORS,
+    NEW_EXCHANGE_BOOK_FAIL,
     NEW_EXCHANGE_BOOK_REQUEST,
+    NEW_EXCHANGE_BOOK_RESET,
     NEW_EXCHANGE_BOOK_SUCCESS
 } from "../Constant/exchangeBookConstant"
 
@@ -41,21 +43,37 @@ export const exchangeBookReducer = (state = { exchangeBooks: [] }, action) => {
 
 export const newExchangeBookReducer = (state = { exchangeBook: {} }, action) => {
 
-     switch(action.type){
+    switch (action.type) {
 
         case NEW_EXCHANGE_BOOK_REQUEST:
-            return{
-                loading:true
+            return {
+                loading: true
             }
 
         case NEW_EXCHANGE_BOOK_SUCCESS:
-            return{
-                
+            return {
+                loading: false,
+                exchangeBook: action.payload
             }
-            
-         default:
-         return state   
+        case NEW_EXCHANGE_BOOK_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case NEW_EXCHANGE_BOOK_RESET:
+            return {
+                loading: false,
+                exchangeBook: {}
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
 
-     }
+    }
 
 }

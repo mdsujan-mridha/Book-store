@@ -6,6 +6,7 @@ import Loader from '../Layout/Loader';
 import { toast } from 'react-toastify';
 import bookImg from "../images/book/book-04.jpg";
 import BookCard from '../Books/BookCard';
+import SellBookCard from '../Books/SellBookCard';
 
 const ExchangeBook = () => {
 
@@ -44,7 +45,7 @@ const ExchangeBook = () => {
                                     {
                                         books &&
                                         books?.map((item) => (
-                                            <BookCard
+                                            <SellBookCard
                                                 key={item?._id}
                                                 item={item}
                                             />

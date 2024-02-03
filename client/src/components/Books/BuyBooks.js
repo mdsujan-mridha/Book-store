@@ -11,10 +11,11 @@ import {
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Layout/Loader';
-import BookCard from './BookCard';
+
 import { clearErrors, getAllSellBooks } from '../Action/sellBookAction';
 import { toast } from 'react-toastify';
 import Pagination from "react-js-pagination"
+import SellBookCard from './SellBookCard';
 
 // set category 
 const categories = [
@@ -136,7 +137,7 @@ const BuyBooks = () => {
                                         {
                                             searchedBooks &&
                                             searchedBooks.map((item) => (
-                                                <BookCard
+                                                <SellBookCard
                                                     item={item}
                                                     key={item._id}
                                                 />

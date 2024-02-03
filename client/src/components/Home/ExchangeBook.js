@@ -16,6 +16,7 @@ const ExchangeBook = () => {
 
     const { exchangeBooks, loading, error } = useSelector(state => state.exchangeBooks);
 
+    const exchangeBook = exchangeBooks.slice(0, 4);
 
     useEffect(() => {
 
@@ -43,8 +44,8 @@ const ExchangeBook = () => {
                                 </div>
                                 <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 mt-9 justify-center items-center content-center gap-5 lg:gap-0'>
                                     {
-                                        exchangeBooks &&
-                                        exchangeBooks?.map((item) => (
+                                        exchangeBook &&
+                                        exchangeBook?.map((item) => (
                                             <BookCard
                                                 key={item._id}
                                                 item={item}

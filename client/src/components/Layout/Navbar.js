@@ -94,6 +94,7 @@ const Navbar = () => {
                                     <div tabIndex={0} role="button" className="btn m-1">{user?.name}</div>
                                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-primary text-white">
                                         <li><Link to="/account">Profile</Link></li>
+                                        <li><Link to="/cart">Cart</Link></li>
                                         <li> <Link onClick={logoutUser} className='text-lg font-bold '> Logout </Link> </li>
                                     </ul>
                                 </div>
