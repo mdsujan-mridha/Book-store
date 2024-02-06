@@ -1,30 +1,32 @@
-
-
 import React, { Fragment, useEffect } from 'react';
 import Loader from '../Layout/Loader';
 import Carousel from 'react-material-ui-carousel';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getExchangeBookDetails } from '../Action/exchangeBookAction';
+import { getSingleRequestBookDetails } from '../Action/requestBookAction';
 import { toast } from 'react-toastify';
+import { clearErrors } from '../Action/exchangeBookAction';
 
+const RequestBookDetails = () => {
 
-const BookDetailsModal = () => {
-
-    const { id } = useParams();
     const dispatch = useDispatch();
 
-    const { loading, exchangeBook, error } = useSelector((state) => state.exchangeBookDetails);
+    const { id } = useParams();
+    const { loading, error, requestBook } = useSelector((state) => state.requestBookDetails)
 
-    console.log(exchangeBook);
 
     useEffect(() => {
+
         if (error) {
             toast.error(error)
             dispatch(clearErrors())
         }
-        dispatch(getExchangeBookDetails(id))
-    }, [dispatch, id,error])
+        dispatch(getSingleRequestBookDetails(id))
+
+    }, [dispatch, id, error])
+
+    console.log(requestBook);
+
 
     return (
         <Fragment>
@@ -43,8 +45,8 @@ const BookDetailsModal = () => {
                                         }}>
                                         <Carousel className='w-full h-full'>
                                             {
-                                                exchangeBook?.images &&
-                                                exchangeBook?.images.map((item, i) => (
+                                                requestBook?.images &&
+                                                requestBook?.images.map((item, i) => (
                                                     <img
                                                         key={item.url}
                                                         src={item?.url}
@@ -58,16 +60,16 @@ const BookDetailsModal = () => {
                                     </div>
                                 </div>
                                 <div className='w-full lg:w-1/2 flex flex-col  justify-start items-start p-5'>
-                                    <p className='text-3xl pb-3 font-bold'> {exchangeBook?.title} </p>
-                                    <p className='text-xl font-bold opacity-60 border-b border-gray-500 w-full'>  productID: #{exchangeBook?._id} </p>
+                                    <p className='text-3xl pb-3 font-bold'> {requestBook?.title} </p>
+                                    <p className='text-xl font-bold opacity-60 border-b border-gray-500 w-full'>  productID: #{requestBook?._id} </p>
                                     <div>
 
                                         <div className='py-7'>
                                             <p className='text-xl font-bold text-gray-600'> Description </p>
-                                            <p className='py-4 text-justify font-semibold opacity-70'> {exchangeBook?.description} </p>
-                                            <p className='text-xl font-semibold'> Category: {exchangeBook?.category} </p>
-                                            <p className='text-xl font-semibold'> Author: {exchangeBook?.author} </p>
-                                            <p className='text-xl font-semibold'> Edition: {exchangeBook?.edition} </p>
+                                            <p className='py-4 text-justify font-semibold opacity-70'> {requestBook?.description} </p>
+                                            <p className='text-xl font-semibold'> Category: {requestBook?.category} </p>
+                                            <p className='text-xl font-semibold'> Author: {requestBook?.author} </p>
+                                            <p className='text-xl font-semibold'> Edition: {requestBook?.edition} </p>
                                         </div>
 
                                     </div>
@@ -82,4 +84,4 @@ const BookDetailsModal = () => {
     );
 };
 
-export default BookDetailsModal;
+export default RequestBookDetails;

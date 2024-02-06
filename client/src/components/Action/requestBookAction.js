@@ -5,7 +5,10 @@ import {
     ALL_REQUEST_BOOK_SUCCESS,
     NEW_REQUEST_BOOK_FAIL,
     NEW_REQUEST_BOOK_REQUEST,
-    NEW_REQUEST_BOOK_SUCCESS
+    NEW_REQUEST_BOOK_SUCCESS,
+    NEW_REQUEST_DETAILS_FAIL,
+    NEW_REQUEST_DETAILS_REQUEST,
+    NEW_REQUEST_DETAILS_SUCCESS
 } from "../Constant/bookRequestConstant"
 
 
@@ -45,3 +48,21 @@ export const postNewBookRequest = (BookRequestData) => async (dispatch) => {
         })
     }
 };
+
+export const getSingleRequestBookDetails = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: NEW_REQUEST_DETAILS_REQUEST
+        })
+        const { data } = await axios.get(`http://localhost:5000/api/v1/request/book/${id}`)
+        dispatch({
+            type: NEW_REQUEST_DETAILS_SUCCESS,
+            payload: data.requestBook,
+        })
+    } catch (error) {
+        dispatch({
+            type: NEW_REQUEST_DETAILS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}

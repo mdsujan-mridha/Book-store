@@ -6,7 +6,10 @@ import {
     NEW_REQUEST_BOOK_FAIL,
     NEW_REQUEST_BOOK_REQUEST,
     NEW_REQUEST_BOOK_RESET,
-    NEW_REQUEST_BOOK_SUCCESS
+    NEW_REQUEST_BOOK_SUCCESS,
+    NEW_REQUEST_DETAILS_FAIL,
+    NEW_REQUEST_DETAILS_REQUEST,
+    NEW_REQUEST_DETAILS_SUCCESS
 } from "../Constant/bookRequestConstant"
 
 export const requestBookReducer = (state = { requestBooks: [] }, action) => {
@@ -71,4 +74,34 @@ export const newRequestBookReducer = (state = { requestBook: {} }, action) => {
         default:
             return state
     }
+}
+
+export const newRequestDetailsReducer = (state = { requestBook: {} }, action) => {
+
+    switch (action.type) {
+        case NEW_REQUEST_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case NEW_REQUEST_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                requestBook: action.payload,
+            }
+        case NEW_REQUEST_DETAILS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+        default:
+            return state
+    }
+
 }

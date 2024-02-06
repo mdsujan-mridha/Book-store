@@ -27,6 +27,7 @@ const user = require("./route/userRouter")
 const book = require("./route/bookRouter")
 const bookRequest = require("./route/requestBookRouter");
 const exchangeBook = require("./route/exchangeBookRouter");
+const order = require("./route/orderRouter");
 // user API 
 app.use("/api/v1", user);
 // sell book router 
@@ -37,6 +38,8 @@ app.use("/api/v1", bookRequest);
 // exchnage book 
 app.use("/api/v1", exchangeBook);
 
+// order 
+app.use("/api/v1", order);
 
 
 // custom error middleware 

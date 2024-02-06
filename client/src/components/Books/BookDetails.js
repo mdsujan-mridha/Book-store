@@ -10,7 +10,7 @@ import { addItemToCart } from '../Action/cartAction';
 
 const BookDetails = () => {
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const dispatch = useDispatch();
     const { loading, book, error } = useSelector((state) => state.book);
     const [quantity, setQuantity] = useState(1);

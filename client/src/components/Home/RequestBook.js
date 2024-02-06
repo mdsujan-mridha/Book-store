@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { getAllRequestBooks } from '../Action/requestBookAction';
 import { clearErrors } from '../Action/sellBookAction';
 import { toast } from 'react-toastify';
-import BookCard from '../Books/BookCard';
 import Loader from '../Layout/Loader';
+import RequestBookCard from '../Books/RequestBookCard';
 
 const RequestBook = () => {
 
@@ -40,7 +40,7 @@ const RequestBook = () => {
                                     {
                                         books &&
                                         books?.map((item) => (
-                                            <BookCard
+                                            <RequestBookCard
                                                 key={item?._id}
                                                 item={item}
                                             />

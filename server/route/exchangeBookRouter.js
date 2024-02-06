@@ -17,9 +17,9 @@ router.route("/exchangebook").post(createExchangeBook);
 router.route("/exchangebooks").get(getAllExchangeBook);
 
 // get exchange book details 
-router.route("/exchangebook/:id").get(isAuthenticatedUser, getExchangeBookDetails);
+router.route("/exchange/:id").get(getExchangeBookDetails);
 // update or delete a book by admin
-router.route("/exchangebook/:id")
+router.route("/exchange/:id")
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateExchangeBook)
     .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteExchangeBook);
 

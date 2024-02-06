@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
 
-import BookCard from './BookCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRequestBooks } from '../Action/requestBookAction';
 import { toast } from 'react-toastify';
 import { clearErrors } from '../Action/sellBookAction';
 import Loader from '../Layout/Loader';
+import RequestBookCard from './RequestBookCard';
 
 
 
@@ -41,7 +41,7 @@ const Books = () => {
                                 {
                                     requestBooks &&
                                     requestBooks?.map((item) => (
-                                        <BookCard
+                                        <RequestBookCard
                                             key={item?.id}
                                             item={item}
                                         />

@@ -9,7 +9,7 @@ const Sidebar = () => {
     return (
         <div className='sidebar'>
             <Link to="/" className='flex justify-center items-center gap-2'>
-                <img src={logo} alt="Log" /> <p className='text-4xl font-bold text-primary'> Book Share </p>
+                {/* <img src={logo} alt="Log" /> <p className='text-4xl font-bold text-primary'> Book Share </p> */}
             </Link>
             <Link to="/admin/dashboard">
                 <p> <Dashboard /> Dashboard</p>

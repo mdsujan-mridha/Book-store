@@ -23,6 +23,8 @@ import Shipping from './components/Cart/Shipping';
 import ConfirmOrder from './components/Cart/ConfirmOrder';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+import BookDetailsModal from './components/Books/BookDetailsModal';
+import RequestBookDetails from './components/Books/RequestBookDetails';
 function App() {
 
   axios.defaults.withCredentials = true;
@@ -42,13 +44,15 @@ function App() {
           <Route path='/register' element={<Signup />} ></Route>
           <Route path='/login' element={<Login />} ></Route>
           <Route path='/about' element={<About />}></Route>
-          <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/contact' element={<Contact />}></Route>
           {/* it will protected  */}
           <Route path='/book/request' element={<Books />}></Route>
+          <Route path='/book/request/:id' element={<RequestBookDetails />}></Route>
           {/* it will protected  */}
           <Route path='/book/exchnage' element={<ExChangeBooks />}></Route>
           <Route path='/sell/books' element={<BuyBooks />}></Route>
           <Route path='/sell/books/:id' element={<BookDetails />}></Route>
+          <Route path='/exchange/books/:id' element={<BookDetailsModal />}></Route>
           {/* protected route  */}
           <Route path='/account' element={<Profile />} ></Route>
           <Route path='/cart' element={<Cart />}></Route>

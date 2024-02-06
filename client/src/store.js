@@ -3,8 +3,8 @@ import { userReducer } from "./components/Reducer/userReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { newSellBookReducer, newSellDetailsReducer, sellBookReducer } from "./components/Reducer/sellBookReducer";
-import { newRequestBookReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
-import { exchangeBookReducer, newExchangeBookReducer } from "./components/Reducer/exchangeBookReducer";
+import { newRequestBookReducer, newRequestDetailsReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
+import { exchangeBookReducer, newExchangeBookReducer, newExchangeDetailsReducer } from "./components/Reducer/exchangeBookReducer";
 import { cartReducer } from "./components/Reducer/cartReducer";
 
 
@@ -15,8 +15,10 @@ const reducer = combineReducers({
     book: newSellDetailsReducer,
     requestBooks: requestBookReducer,
     requestBook: newRequestBookReducer,
+    requestBookDetails: newRequestDetailsReducer,
     exchangeBooks: exchangeBookReducer,
     exchangeBook: newExchangeBookReducer,
+    exchangeBookDetails: newExchangeDetailsReducer,
     sellBookDetails: newSellDetailsReducer,
     cart: cartReducer,
 });
