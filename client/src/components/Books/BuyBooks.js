@@ -38,7 +38,7 @@ const BuyBooks = () => {
     const [search, setSearch] = useState("");
 
 
-    console.log(category)
+    // console.log(category)
 
 
     // clear filter 

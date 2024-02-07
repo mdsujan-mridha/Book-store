@@ -26,7 +26,7 @@ const ExchangeBook = () => {
 
     }, [dispatch, error])
 
-    console.log(sellBooks);
+    // console.log(sellBooks);
 
     return (
         <Fragment>
