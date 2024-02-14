@@ -4,6 +4,7 @@ import logo from "../images/logo.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { clearErrors, logout } from '../Action/userAction';
+import { AccountBox, Dashboard, ListAlt, Logout, ShoppingCart } from '@mui/icons-material';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -93,13 +94,19 @@ const Navbar = () => {
                                 <div className="dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn m-1">{user?.name}</div>
                                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow rounded-box w-52 bg-primary text-white">
-                                        <li><Link to="/account">Profile</Link></li>
-                                        <li><Link to="/cart">Cart</Link></li>
-                                        <li> <Link onClick={logoutUser} className='text-lg font-bold '> Logout </Link> </li>
+                                        <li><Link to="/account"><AccountBox /> Profile</Link></li>
+                                        <li><Link to="/cart"><ShoppingCart /> Cart</Link></li>
+                                        <li><Link to="/orders"><ListAlt /> Order</Link></li>
+                                        {
+                                            user && isAuthenticated && user.role === "admin" && (
+                                                <li>
+                                                    <Link to="/admin/dashboard"><Dashboard /> Dashboard</Link>
+                                                </li>
+                                            )
+                                        }
+                                        <li> <Link onClick={logoutUser} className='text-lg font-bold '> <Logout /> Logout </Link> </li>
                                     </ul>
                                 </div>
-
-
                             </>
                             :
                             <>

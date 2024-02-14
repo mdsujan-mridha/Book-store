@@ -2,8 +2,29 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 
 const Book = require("../models/exchangeBookModel");
 const ApiFeatures = require("../utils/ApiFeatures");
+const cloudinary = require("cloudinary");
 
 exports.createExchangeBook = catchAsyncError(async (req, res, next) => {
+
+    // let images = [];
+    // if (typeof req.body.images === "string") {
+    //     images.push(req.body.images);
+    // } else {
+    //     images = req.body.images;
+    // }
+    // const imageLink = [];
+    // for (let i = 0; i < images.length; i++) {
+    //     const result = await cloudinary.v2.uploader.upload(images[i], {
+    //         folder: "books",
+    //     });
+    //     imageLink.push({
+    //         public_id: result.public_id,
+    //         url: result.secure_url,
+    //     });
+    // }
+    // req.body.images = imageLink;
+    // req.body.user = req.user.id;
+
     const book = await Book.create(req.body);
 
     // is success then send message 

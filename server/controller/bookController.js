@@ -1,7 +1,8 @@
 const catchAsyncError = require("../middleware/catchAsyncError");
 const Book = require("../models/bookModel");
-const ApiFeatures = require("../utils/ApiFeatures");
+const ErrorHandler = require("../utils/ErrorHandler");
 const cloudinary = require("cloudinary");
+const ApiFeatures = require("../utils/ApiFeatures");
 
 // create book
 exports.createBook = catchAsyncError(async (req, res, next) => {
@@ -61,7 +62,7 @@ exports.getAllBooks = catchAsyncError(async (req, res, next) => {
 exports.getBookDetails = catchAsyncError(async (req, res, next) => {
     const book = await Book.findById(req.params.id);
     if (!book) {
-        return next(new AppError("No book found with that ID", 404))
+        return next(new ErrorHandler("No book found with that ID", 404))
     }
     res.status(200).json({
         success: true,
@@ -71,11 +72,11 @@ exports.getBookDetails = catchAsyncError(async (req, res, next) => {
 
 // update book by admin 
 exports.updateBook = catchAsyncError(async (req, res, next) => {
-    const book = await Book.findById(req.params.id);
+    let book = await Book.findById(req.params.id);
     if (!book) {
-        return next(new AppError("No book found with that ID", 404))
+        return next(new ErrorHandler("No book found with that ID", 404))
     }
-    book = await book.findByIdAndUpdate(req.params.id, req.body, {
+    book = await Book.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
         useFindAndModify: false,
@@ -90,11 +91,12 @@ exports.updateBook = catchAsyncError(async (req, res, next) => {
 exports.deleteBook = catchAsyncError(async (req, res, next) => {
     const book = await Book.findById(req.params.id);
     if (!book) {
-        return next(new AppError("No book found with that ID", 404))
+        return next(new ErrorHandler("No book found with that ID", 404))
     }
-    await book.remove();
+    await book.deleteOne();
     res.status(204).json({
         success: true,
+        message: "Book deleted successfully"
     })
 })
 

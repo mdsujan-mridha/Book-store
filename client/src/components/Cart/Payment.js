@@ -8,6 +8,7 @@ import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useS
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { createOrder } from '../Action/orderAction';
 
 const Payment = ({ stripeApiKey }) => {
 
@@ -18,12 +19,14 @@ const Payment = ({ stripeApiKey }) => {
     const elements = useElements();
     const navigate = useNavigate()
 
+    // console.log(stripeApiKey)
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
+    console.log(orderInfo);
 
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
 
-    console.log(shippingInfo);
+    console.log(cartItems);
     const paymentData = {
         amount: Math.round(orderInfo?.totalPrice * 100),
     };
@@ -83,7 +86,7 @@ const Payment = ({ stripeApiKey }) => {
                         status: result.paymentIntent.status,
                     };
                     // set order on database 
-                    // dispatch(createOrder(order))
+                    dispatch(createOrder(order))
                     navigate("/success");
                 } else {
                     toast.warn("There's some issue while processing payment");

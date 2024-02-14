@@ -30,6 +30,14 @@ import Payment from './components/Cart/Payment';
 import ProtectedRoute from './components/Route/ProtectedRoute';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import Success from './components/Cart/Success';
+import MyOrder from './components/Order/MyOrder';
+import OrderDetails from './components/Order/OrderDetails';
+import NewProduct from './components/Admin/NewProduct';
+import ProductList from './components/Admin/ProductList';
+import UpdateProduct from './components/Admin/UpdateProduct';
+import UserList from './components/Admin/UserList';
+import UpdateUser from './components/Admin/UpdateUser';
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -76,6 +84,9 @@ function App() {
             <Route path='/cart' element={<Cart />}></Route>
             <Route path='/shipping' element={<Shipping />}></Route>
             <Route path='/order/confirm' element={<ConfirmOrder />}></Route>
+            <Route path='/success' element={<Success />}></Route>
+            <Route path='/orders' element={<MyOrder />}></Route>
+            <Route path='/order/:id' element={<OrderDetails />}></Route>
             <Route>
               {stripeApiKey && (
                 <Route
@@ -92,8 +103,89 @@ function App() {
           </Route>
 
           {/* admin route  */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
 
-          <Route path='/admin/dashboard' element={<Dashboard />} ></Route>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          ></Route>
+          {/* product list */}
+          <Route
+            path="/admin/books"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <ProductList />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+          {/* create new product by admin  */}
+          <Route
+            path="/admin/product/new"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <NewProduct />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+          {/* update product  */}
+          <Route
+            path="/admin/book/:id"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <UpdateProduct />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+          {/* user list  */}
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <UserList />
+              </ProtectedRoute>
+            }
+          ></Route>
+          {/* update user list  */}
+          <Route
+            path="/admin/user/:id"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <UpdateUser />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+
 
         </Routes>
         <Footer />

@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getAllSellBooks } from '../Action/sellBookAction';
 import Loader from '../Layout/Loader';
 import { toast } from 'react-toastify';
-import bookImg from "../images/book/book-04.jpg";
-import BookCard from '../Books/BookCard';
 import SellBookCard from '../Books/SellBookCard';
 
 const ExchangeBook = () => {
@@ -14,7 +12,7 @@ const ExchangeBook = () => {
 
     const { sellBooks, loading, error } = useSelector((state) => state.sellBooks);
 
-    const books = sellBooks.slice(0, 4);
+    const books = sellBooks?.slice(0, 4);
 
     useEffect(() => {
         if (error) {

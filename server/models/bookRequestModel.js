@@ -22,7 +22,24 @@ const requestSchema = new mongoose.Schema({
     edition: {
         type: String,
         required: [true, 'Enter your book edition'],
-    }
+    },
+    images: [
+        {
+            public_id: {
+                type: String,
+                required: true
+            },
+            url: {
+                type: String,
+                required: true,
+            },
+        },
+    ],
+ user:{
+    type: mongoose.Schema.Types.ObjectId,
+     ref: "users",
+     required: true
+ }
 })
 
 module.exports = mongoose.model("requestBook", requestSchema);

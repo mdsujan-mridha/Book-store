@@ -9,7 +9,16 @@ import {
     NEW_SELL_BOOK_SUCCESS,
     NEW_SELL_DETAILS_FAIL,
     NEW_SELL_DETAILS_REQUEST,
-    NEW_SELL_DETAILS_SUCCESS
+    NEW_SELL_DETAILS_SUCCESS,
+    UPDATE_SELL_BOOK_FAIL,
+    UPDATE_SELL_BOOK_REQUEST,
+    UPDATE_SELL_BOOK_SUCCESS,
+    DELETE_SELL_BOOK_FAIL,
+    DELETE_SELL_BOOK_REQUEST,
+    DELETE_SELL_BOOK_SUCCESS,
+    ADMIN_SELL_BOOK_FAIL,
+    ADMIN_SELL_BOOK_REQUEST,
+    ADMIN_SELL_BOOK_SUCCESS,
 } from "../Constant/sellBookConstant"
 
 
@@ -74,6 +83,67 @@ export const getSingleSellBookDetails = (id) => async (dispatch) => {
         })
     }
 }
+
+
+// get all product by admin  
+export const getAdminProduct = () => async (dispatch) => {
+
+    try {
+        dispatch({ type: ADMIN_SELL_BOOK_REQUEST })
+        const { data } = await axios.get(`http://localhost:5000/api/v1/books/admin`)
+        dispatch({
+            type: ADMIN_SELL_BOOK_SUCCESS,
+            payload: data.books,
+        })
+    } catch (error) {
+        dispatch({
+            type: ADMIN_SELL_BOOK_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+
+
+// delete product by admin 
+export const deleteProduct = (id) => async (dispatch) => {
+
+    try {
+
+        dispatch({
+            type: DELETE_SELL_BOOK_REQUEST
+        })
+        const { data } = await axios.delete(`http://localhost:5000/api/v1/book/${id}`)
+        dispatch({
+            type: DELETE_SELL_BOOK_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_SELL_BOOK_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+
+export const updateProduct = (id, productData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_SELL_BOOK_REQUEST })
+        const { data } = await axios.put(`http://localhost:5000/api/v1/book/${id}`, productData)
+        dispatch({
+            type: UPDATE_SELL_BOOK_SUCCESS,
+            payload: data.success,
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_SELL_BOOK_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 // clear error 
 export const clearErrors = () => async (dispatch) => {

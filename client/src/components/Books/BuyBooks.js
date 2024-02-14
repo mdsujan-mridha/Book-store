@@ -72,7 +72,7 @@ const BuyBooks = () => {
     }, [currentPage, category, dispatch, error]);
 
 
-    const searchedBooks = sellBooks.filter((book) => {
+    const searchedBooks = sellBooks?.filter((book) => {
         return book.title.toLowerCase().includes(search.toLowerCase())
     })
 

@@ -17,6 +17,8 @@ router.route("/order/new").post(isAuthenticatedUser, newOrder);
 router.route("/orders/me").get(isAuthenticatedUser, myOrder);
 // get all orders by admin 
 router.route("/admin/orders").get(isAuthenticatedUser, authorizeRoles("admin"), getAllOrders);
+// order details by admin
+router.route("/order/:id").get(isAuthenticatedUser, getSingleOrder);
 // order details -admin
 router.route("/order/:id").get(isAuthenticatedUser, authorizeRoles("admin"), getSingleOrder);
 // delete or update order 

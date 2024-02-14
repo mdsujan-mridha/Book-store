@@ -1,17 +1,19 @@
 import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux";
-import { userReducer } from "./components/Reducer/userReducer";
+import { allUserReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from "./components/Reducer/userReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import { newSellBookReducer, newSellDetailsReducer, sellBookReducer } from "./components/Reducer/sellBookReducer";
+import { newSellBookReducer, newSellDetailsReducer, sellBookReducer, updateSellBookReducer } from "./components/Reducer/sellBookReducer";
 import { newRequestBookReducer, newRequestDetailsReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
 import { exchangeBookReducer, newExchangeBookReducer, newExchangeDetailsReducer } from "./components/Reducer/exchangeBookReducer";
 import { cartReducer } from "./components/Reducer/cartReducer";
+import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "./components/Reducer/orderReducer";
 
 
 const reducer = combineReducers({
     user: userReducer,
     sellBooks: sellBookReducer,
     sellBook: newSellBookReducer,
+    updateSellBook: updateSellBookReducer,
     book: newSellDetailsReducer,
     requestBooks: requestBookReducer,
     requestBook: newRequestBookReducer,
@@ -21,6 +23,17 @@ const reducer = combineReducers({
     exchangeBookDetails: newExchangeDetailsReducer,
     sellBookDetails: newSellDetailsReducer,
     cart: cartReducer,
+    allOrders: allOrdersReducer,
+    // update & delete order by admin 
+    order: orderReducer,
+    newOrder: newOrderReducer,
+    myOrders: myOrdersReducer,
+    orderDetails: orderDetailsReducer,
+    allUsers: allUserReducer,
+    userDetails: userDetailsReducer,
+    profile: profileReducer,
+    forgotPassword: forgotPasswordReducer,
+
 });
 
 let initialState = {

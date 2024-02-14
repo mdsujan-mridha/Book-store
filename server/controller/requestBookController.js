@@ -2,9 +2,28 @@ const catchAsyncError = require("../middleware/catchAsyncError");
 const RequestBook = require("../models/bookRequestModel");
 const ApiFeatures = require("../utils/ApiFeatures");
 
-
+const cloudinary = require("cloudinary");
 // create request 
 exports.createRequest = catchAsyncError(async (req, res, next) => {
+
+    // let images = [];
+    // if (typeof req.body.images === "string") {
+    //     images.push(req.body.images);
+    // } else {
+    //     images = req.body.images;
+    // }
+    // const imageLink = [];
+    // for (let i = 0; i < images.length; i++) {
+    //     const result = await cloudinary.v2.uploader.upload(images[i], {
+    //         folder: "books",
+    //     });
+    //     imageLink.push({
+    //         public_id: result.public_id,
+    //         url: result.secure_url,
+    //     });
+    // }
+    // req.body.images = imageLink;
+    // req.body.user = req.user.id;
 
     const requestBook = await RequestBook.create(req.body);
     res.status(201).json({
