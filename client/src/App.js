@@ -38,6 +38,8 @@ import ProductList from './components/Admin/ProductList';
 import UpdateProduct from './components/Admin/UpdateProduct';
 import UserList from './components/Admin/UserList';
 import UpdateUser from './components/Admin/UpdateUser';
+import OrderList from './components/Admin/OrderList';
+import UpdateOrder from './components/Admin/UpdateOrder';
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -185,7 +187,34 @@ function App() {
             }
           ></Route>
 
+          {/* order list  */}
+          <Route
+            path="/admin/orders"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <OrderList />
+              </ProtectedRoute>
+            }
+          ></Route>
 
+          {/* update order list  */}
+
+          <Route
+            path="/admin/order/:id"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <UpdateOrder />
+              </ProtectedRoute>
+            }
+          ></Route>
 
         </Routes>
         <Footer />

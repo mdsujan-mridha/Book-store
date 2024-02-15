@@ -40,8 +40,11 @@ const Sidebar = () => {
                         </Link>
                     </TreeItem>
                     <TreeItem nodeId="35" label="Orders">
-                        <TreeItem nodeId="33" label="Add Orders" />
-                        <TreeItem nodeId="36" label="All Orders" />
+
+                        <Link to="/admin/orders">
+                            <TreeItem nodeId="36" label="All Orders" />
+                        </Link>
+
                     </TreeItem>
                     <TreeItem nodeId="15" label="Blog">
                         <TreeItem nodeId="13" label="Add Blog" />
