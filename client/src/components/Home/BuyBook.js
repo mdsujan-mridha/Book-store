@@ -5,6 +5,7 @@ import { clearErrors, getAllSellBooks } from '../Action/sellBookAction';
 import Loader from '../Layout/Loader';
 import { toast } from 'react-toastify';
 import SellBookCard from '../Books/SellBookCard';
+import AOS from 'aos';
 
 const ExchangeBook = () => {
 
@@ -22,7 +23,14 @@ const ExchangeBook = () => {
 
         dispatch(getAllSellBooks());
 
-    }, [dispatch, error])
+    }, [dispatch, error]);
+
+
+    useEffect(() => {
+
+        AOS.init();
+
+    }, [])
 
     // console.log(sellBooks);
 
@@ -34,7 +42,8 @@ const ExchangeBook = () => {
                     :
                     (
                         <Fragment>
-                            <div className="px-12 mt-9 pb-2">
+                            <div data-aos="fade-up"
+                                data-aos-duration="3000" className="px-12 mt-9 pb-2">
                                 <div className='w-full flex justify-between items-center content-center'>
                                     <p className='text-lg font-bold text-gray-500'>Buy Book</p>
                                     <Link className='text-lg font-bold text-gray-500'> View all </Link>

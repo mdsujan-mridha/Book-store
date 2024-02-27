@@ -6,12 +6,19 @@ import { Line, Doughnut } from "react-chartjs-2";
 
 import LineChart from './LineChart';
 
-import { Chart, CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement,ArcElement } from 'chart.js';
+import { Chart, CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement, ArcElement } from 'chart.js';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Register necessary controllers and elements
-Chart.register(CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement,ArcElement);
+Chart.register(CategoryScale, LinearScale, Title, Legend, BarController, LineController, PointElement, BarElement, LineElement, ArcElement);
 
 const Dashboard = () => {
+
+    const { books } = useSelector((state) => state.sellBooks);
+    const { users } = useSelector((state) => state.allUsers);
+    const { orders } = useSelector((state) => state.allOrders);
+
     const Data = [
         {
             id: 1,
@@ -66,6 +73,12 @@ const Dashboard = () => {
 
     //    line state 
     const outOfStock = 0;
+    let totalAmount = 0;
+
+    orders &&
+        orders.forEach((item) => {
+            totalAmount += item.totalPrice;
+        })
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
         datasets: [
@@ -73,10 +86,11 @@ const Dashboard = () => {
                 label: "TOTAL AMOUNT",
                 backgroundColor: ["tomato"],
                 hoverBackgroundColor: ["rgb(197, 72, 49)"],
-                data: [0, 4000],
+                data: [0, totalAmount],
             },
         ],
     };
+    
     const doughnutState = {
         labels: ["Out of Stock", "InStock"],
         datasets: [
@@ -93,18 +107,18 @@ const Dashboard = () => {
             <div className="dashboardContainer">
                 <h1>Dashboard</h1>
                 <div className='px-12 flex gap-5 mb-10'>
-                    <div className='w-96 h-52 bg-primary rounded-md flex flex-col justify-center items-center'>
+                    <Link to="/admin/books" className='w-96 h-52 bg-primary rounded-md flex flex-col justify-center items-center'>
                         <h1 className='text-center text-white font-bold text-3xl'> Total Books </h1>
-                        <p className='text-xl font-bold text-white text-center'> 200+ </p>
-                    </div>
-                    <div className='w-96 h-52 bg-orange-500 rounded-md flex flex-col justify-center items-center'>
+                        <p className='text-xl font-bold text-white text-center'> {books?.length} + </p>
+                    </Link>
+                    <Link to="/admin/users" className='w-96 h-52 bg-orange-500 rounded-md flex flex-col justify-center items-center'>
                         <h1 className='text-center text-white font-bold text-3xl'> Total users </h1>
-                        <p className='text-xl font-bold text-white text-center'> 100+ </p>
-                    </div>
-                    <div className='w-96 h-52 bg-red-500 rounded-md flex flex-col justify-center items-center'>
+                        <p className='text-xl font-bold text-white text-center'> {users?.length} + </p>
+                    </Link>
+                    <Link to="/admin/orders" className='w-96 h-52 bg-red-500 rounded-md flex flex-col justify-center items-center'>
                         <h1 className='text-center text-white font-bold text-3xl'> Total Orders </h1>
-                        <p className='text-xl font-bold text-white text-center'> 50+ </p>
-                    </div>
+                        <p className='text-xl font-bold text-white text-center'> {orders?.length}+ </p>
+                    </Link>
                 </div>
                 <div className='w-full flex flex-col lg:flex-row'>
                     <div className='w-full  lg:w-1/2'>

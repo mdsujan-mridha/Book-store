@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import Loader from '../Layout/Loader';
 import RequestBookCard from '../Books/RequestBookCard';
 
+import AOS from 'aos';
+
 const RequestBook = () => {
 
     const dispatch = useDispatch();
@@ -21,7 +23,14 @@ const RequestBook = () => {
         }
         dispatch(getAllRequestBooks());
 
-    }, [dispatch, error])
+    }, [dispatch, error]);
+
+    useEffect(() => {
+
+        AOS.init();
+
+    }, [])
+
 
     return (
         <Fragment>
@@ -31,7 +40,9 @@ const RequestBook = () => {
                     :
                     (
                         <Fragment>
-                            <div className="px-12 mt-9 pb-2">
+                            <div data-aos="fade-down"
+                                data-aos-easing="linear"
+                                data-aos-duration="1500" className="px-12 mt-9 pb-2">
                                 <div className='w-full flex justify-between items-center content-center'>
                                     <p className='text-lg font-bold text-gray-500'>Request Book </p>
                                     <Link className='text-lg font-bold text-gray-500'> View all </Link>

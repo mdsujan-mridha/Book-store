@@ -40,29 +40,30 @@ import UserList from './components/Admin/UserList';
 import UpdateUser from './components/Admin/UpdateUser';
 import OrderList from './components/Admin/OrderList';
 import UpdateOrder from './components/Admin/UpdateOrder';
+import AllRequestBook from './components/Admin/AllRequestBook';
+import AllExchnageBook from './components/Admin/AllExchnageBook';
+import CashierDashboard from './components/User/CashierDashboard';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+
+
 function App() {
-
+  axios.defaults.withCredentials = true;
   const { isAuthenticated, user } = useSelector((state) => state.user);
-
   // console.log(user);
   const [stripeApiKey, setStripeApiKey] = useState("");
-
-  axios.defaults.withCredentials = true;
 
   async function getStripeApiKey() {
     const { data } = await axios.get("http://localhost:5000/api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
   }
-  console.log(stripeApiKey);
-
+  // console.log(stripeApiKey);
   useEffect(() => {
     store.dispatch(loadUser());
     getStripeApiKey();
-  }, [])
-
+  }, []);
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     <Fragment>
-
       <Router>
         <Navbar />
         <ToastContainer />
@@ -80,6 +81,7 @@ function App() {
           <Route path='/sell/books' element={<BuyBooks />}></Route>
           <Route path='/sell/books/:id' element={<BookDetails />}></Route>
           <Route path='/exchange/books/:id' element={<BookDetailsModal />}></Route>
+          <Route path='/cashier/dashboard' element={<CashierDashboard />}></Route>
           {/* protected route  user*/}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route path='/account' element={<Profile />} ></Route>
@@ -200,9 +202,7 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
-
           {/* update order list  */}
-
           <Route
             path="/admin/order/:id"
             element={
@@ -216,6 +216,35 @@ function App() {
             }
           ></Route>
 
+          {/* request book  */}
+
+          <Route
+            path="/admin/allrequestbook"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <AllRequestBook />
+              </ProtectedRoute>
+            }
+          ></Route>
+
+          {/* all exchange book  */}
+
+          <Route
+            path="/admin/exchangebook"
+            element={
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                adminRoute={true}
+                isAdmin={user?.role === "admin" ? true : false}
+              >
+                <AllExchnageBook />
+              </ProtectedRoute>
+            }
+          ></Route>
         </Routes>
         <Footer />
       </Router>

@@ -30,8 +30,16 @@ const Sidebar = () => {
                         </Link>
                     </TreeItem>
                     <TreeItem nodeId="5" label="Request Book">
-                        <TreeItem nodeId="10" label="Create Request" />
-                        <TreeItem nodeId="6" label="All Request" />
+
+                        <Link to="/admin/allrequestbook">
+                            <TreeItem nodeId="6" label="All Request" />
+                        </Link>
+                    </TreeItem>
+                    <TreeItem nodeId="55" label="Exchange Books">
+
+                        <Link to="/admin/exchangebook">
+                            <TreeItem nodeId="56" label="All Exchange" />
+                        </Link>
                     </TreeItem>
 
                     <TreeItem nodeId="25" label="User">
@@ -40,11 +48,9 @@ const Sidebar = () => {
                         </Link>
                     </TreeItem>
                     <TreeItem nodeId="35" label="Orders">
-
                         <Link to="/admin/orders">
                             <TreeItem nodeId="36" label="All Orders" />
                         </Link>
-
                     </TreeItem>
                     <TreeItem nodeId="15" label="Blog">
                         <TreeItem nodeId="13" label="Add Blog" />

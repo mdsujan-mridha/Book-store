@@ -3,27 +3,22 @@ import { Link } from 'react-router-dom';
 import logo from "../images/logo.png";
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, logout } from '../Action/userAction';
+import { loadUser, logout } from '../Action/userAction';
 import { AccountBox, Dashboard, ListAlt, Logout, ShoppingCart } from '@mui/icons-material';
+import store from '../../store';
 
 const Navbar = () => {
     const dispatch = useDispatch();
-    const { user, error, isAuthenticated } = useSelector((state) => state.user);
-
-
-    useEffect(() => {
-
-        if (error) {
-            toast.error(error);
-            dispatch(clearErrors())
-        }
-
-    }, [error, dispatch]);
-
+    const { user, isAuthenticated } = useSelector((state) => state.user);
     const logoutUser = () => {
         dispatch(logout())
         toast.success("Log out")
     }
+    useEffect(() => {
+        store.dispatch(loadUser());
+    }, []);
+
+
 
     const menuItem = [
         {
@@ -97,6 +92,7 @@ const Navbar = () => {
                                         <li><Link to="/account"><AccountBox /> Profile</Link></li>
                                         <li><Link to="/cart"><ShoppingCart /> Cart</Link></li>
                                         <li><Link to="/orders"><ListAlt /> Order</Link></li>
+                                        <li><Link to="/cashier/dashboard"><ListAlt />  Cashier Dashboard </Link></li>
                                         {
                                             user && isAuthenticated && user.role === "admin" && (
                                                 <li>

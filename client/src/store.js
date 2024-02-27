@@ -3,8 +3,8 @@ import { allUserReducer, forgotPasswordReducer, profileReducer, userDetailsReduc
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { newSellBookReducer, newSellDetailsReducer, sellBookReducer, updateSellBookReducer } from "./components/Reducer/sellBookReducer";
-import { newRequestBookReducer, newRequestDetailsReducer, requestBookReducer } from "./components/Reducer/requestBookReducer";
-import { exchangeBookReducer, newExchangeBookReducer, newExchangeDetailsReducer } from "./components/Reducer/exchangeBookReducer";
+import { newRequestBookReducer, newRequestDetailsReducer, requestBookReducer, updateRequestBook } from "./components/Reducer/requestBookReducer";
+import { exchangeBookReducer, newExchangeBookReducer, newExchangeDetailsReducer, updateExchangeBookReducer } from "./components/Reducer/exchangeBookReducer";
 import { cartReducer } from "./components/Reducer/cartReducer";
 import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "./components/Reducer/orderReducer";
 
@@ -33,6 +33,8 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     profile: profileReducer,
     forgotPassword: forgotPasswordReducer,
+    updateRequestBook: updateRequestBook,
+    updateExchangeBook: updateExchangeBookReducer,
 
 });
 
