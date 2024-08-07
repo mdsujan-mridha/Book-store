@@ -37,10 +37,7 @@ const Navbar = () => {
             id: 4,
             menu: <Link to="/sell/books"> Buy Books </Link>
         },
-        {
-            id: 5,
-            menu: <Link to="/blogs"> Blogs </Link>
-        },
+        
         {
             id: 6,
             menu: <Link to="/contact"> Contact </Link>
@@ -97,6 +94,13 @@ const Navbar = () => {
                                             user && isAuthenticated && user.role === "admin" && (
                                                 <li>
                                                     <Link to="/admin/dashboard"><Dashboard /> Dashboard</Link>
+                                                </li>
+                                            )
+                                        }
+                                        {
+                                            user && isAuthenticated && user.role === "cashier" && (
+                                                <li>
+                                                    <li><Link to="/cashier/dashboard"><ListAlt />  Cashier Dashboard </Link></li>
                                                 </li>
                                             )
                                         }

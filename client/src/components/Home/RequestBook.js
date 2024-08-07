@@ -14,7 +14,7 @@ const RequestBook = () => {
     const dispatch = useDispatch();
 
     const { requestBooks, loading, error } = useSelector((state) => state.requestBooks);
-    const books = requestBooks.slice(0, 4);
+    const books = requestBooks?.slice(0, 4);
 
     useEffect(() => {
         if (error) {

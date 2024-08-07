@@ -142,6 +142,7 @@ const Profile = () => {
             category: category,
             edition: edition,
             images: images, // To store Base64 encoded images
+            user: user?._id
         }
         console.log(requestBook)
         dispatch(postNewBookRequest(requestBook))
@@ -155,7 +156,8 @@ const Profile = () => {
             author: author,
             category: category,
             edition: edition,
-            images: images, // To store Base64 encoded images
+            images: images[0]?.data, // To store Base64 encoded images
+            user: user?._id
         }
         console.log(exchangeBook)
         dispatch(postNewExchangeBook(exchangeBook))
@@ -504,7 +506,7 @@ const Profile = () => {
                                         <img src={item?.img} alt={item?.name} className='w-52 h-52 rounded-xl pt-1' />
                                         <div className='pb-3'>
                                             <h2 className='text-center font-bold text-lg pt-2'> {item.name} </h2>
-                                            <p className='text-md font-semibold px-2 text-left text-orange-500'>Price: ${item?.price} </p>
+                                            <p className='text-md font-semibold px-2 text-left text-orange-500'>Price: BDT {item?.price} </p>
                                         </div>
                                     </div>
                                 ))

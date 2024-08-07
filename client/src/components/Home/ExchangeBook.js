@@ -16,7 +16,7 @@ const ExchangeBook = () => {
 
     const { exchangeBooks, loading, error } = useSelector(state => state.exchangeBooks);
 
-    const exchangeBook = exchangeBooks.slice(0, 4);
+    const exchangeBook = exchangeBooks?.slice(0, 4);
 
     useEffect(() => {
 
