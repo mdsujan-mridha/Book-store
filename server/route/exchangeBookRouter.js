@@ -12,12 +12,12 @@ const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
 
 // create request exchange book 
-router.route("/exchangebook").post(createExchangeBook);
+router.route("/exchangebook").post(isAuthenticatedUser,createExchangeBook);
 // get all request  books 
 router.route("/exchangebooks").get(getAllExchangeBook);
 
 // get exchange book details 
-router.route("/exchange/:id").get(getExchangeBookDetails);
+router.route("/exchange/:id").get(isAuthenticatedUser,getExchangeBookDetails);
 // update or delete a book by admin
 router.route("/exchange/:id")
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateExchangeBook)

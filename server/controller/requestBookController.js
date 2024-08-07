@@ -93,7 +93,7 @@ exports.deleteRequestBook = catchAsyncError(async (req, res, next) => {
     if (!requestBook) {
         return next(new AppError("No book found with that ID", 404))
     }
-    await requestBook.remove();
+    await requestBook.deleteOne();
     res.status(204).json({
         success: true,
         requestBook

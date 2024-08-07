@@ -96,7 +96,7 @@ exports.deleteExchangeBook = catchAsyncError(async (req, res, next) => {
     if (!exchangeBook) {
         return next(new AppError("No book found with that ID", 404))
     }
-    await exchangeBook.remove();
+    await exchangeBook.deleteOne();
     res.status(204).json({
         success: true,
         message: "Book deleted successfully"
